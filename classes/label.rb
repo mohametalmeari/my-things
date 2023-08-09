@@ -10,7 +10,7 @@ class Label
   end
 
   def add_item(item)
-    item.add_label = self
+    item.add_label = self unless item.author == (self)
     @items << item
   end
 end
