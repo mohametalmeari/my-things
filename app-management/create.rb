@@ -7,14 +7,10 @@ require_relative '../classes/author'
 
 class Create
   def new_book(lists)
-    print 'Publisher: '
-    publisher = gets.chomp
-    print 'Cover State [Good/Bad]: '
-    cover_state = gets.chomp
-    print 'Publish Date[YYYY-MM-DD]: '
-    publish_date = Date.parse(gets.chomp)
-    print 'Label: '
-    label_title = gets.chomp
+    input = acquire_book_input
+    return unless input
+
+    publisher, cover_state, publish_date, label_title = input
 
     book = Book.new(publisher, cover_state, publish_date: publish_date)
     saved_label = lists[:labels_list].find { |label| label.title == label_title }
@@ -24,7 +20,8 @@ class Create
     end
     saved_label.add_item(book)
     lists[:books_list] << book
-    puts 'Book was created successfully'
+    puts 'Book was created successfully ✅'
+    puts 'Press ENTER to get back to the menu'
     lists
   end
 
@@ -34,13 +31,10 @@ class Create
   end
 
   def new_music_album(lists)
-    print 'Genre: '
-    genre_name = gets.chomp
-    print 'On spotify [Y/N]: '
-    on_spotify = gets.chomp.downcase
-    on_spotify = (on_spotify == 'y')
-    print 'Publish Date[YYYY-MM-DD]: '
-    publish_date = Date.parse(gets.chomp)
+    input = acquire_album_input
+    return unless input
+
+    genre_name, on_spotify, publish_date = input
 
     music_album = MusicAlbum.new(on_spotify: on_spotify, publish_date: publish_date)
     saved_genre = lists[:genres_list].find { |genre| genre.name == genre_name }
@@ -50,7 +44,8 @@ class Create
     end
     saved_genre.add_item(music_album)
     lists[:music_albums_list] << music_album
-    puts 'MusicAlbum was created successfully'
+    puts 'MusicAlbum was created successfully ✅'
+    puts 'Press ENTER to get back to the menu'
     lists
   end
 
@@ -59,16 +54,10 @@ class Create
   end
 
   def new_game(lists)
-    print 'Multiplayer: '
-    multiplayer = gets.chomp
-    print 'Last played at[YYYY-MM-DD]: '
-    last_played_at = Date.parse(gets.chomp)
-    print 'Publish Date[YYYY-MM-DD]: '
-    publish_date = Date.parse(gets.chomp)
-    print 'Author\'s first name: '
-    author_fn = gets.chomp
-    print 'Author\'s last name: '
-    author_ln = gets.chomp
+    input = acquire_game_input
+    return unless input
+
+    multiplayer, last_played_at, publish_date, author_fn, author_ln = input
     game = Game.new(multiplayer, last_played_at, publish_date: publish_date)
     saved_author = lists[:authors_list].find do |author|
       author.first_name == author_fn && author.last_name == author_ln
@@ -79,11 +68,82 @@ class Create
     end
     saved_author.add_item(game)
     lists[:games_list] << game
-    puts 'Game was created successfully'
+    puts 'Game was created successfully ✅'
+    puts 'Press ENTER to get back to the menu'
     lists
   end
 
   def new_author(author_fn, author_ln)
     Author.new(author_fn, author_ln)
+  end
+
+  def acquire_book_input
+    begin
+      puts 'Start creating a new book ✒️'
+      print 'Publisher: '
+      publisher = gets.chomp
+
+      print 'Cover State [Good/Bad]: '
+      cover_state = gets.chomp
+      raise ArgumentError, 'invalid cover state' unless %w[good bad g b].include?(cover_state.downcase)
+
+      print 'Publish Date[YYYY-MM-DD]: '
+      publish_date = Date.parse(gets.chomp)
+
+      print 'Label: '
+      label_title = gets.chomp
+    rescue ArgumentError, TypeError => e
+      puts "⚠️  Error: #{e}!"
+      return
+    end
+
+    [publisher, cover_state, publish_date, label_title]
+  end
+
+  def acquire_album_input
+    begin
+      puts 'Start creating a new MusicAlbum ✒️'
+      print 'Genre: '
+      genre_name = gets.chomp
+
+      print 'On spotify [Y/N]: '
+      on_spotify = gets.chomp.downcase
+      raise ArgumentError, 'invalid on spotify state' if on_spotify.downcase != 'y' && on_spotify.downcase != 'n'
+
+      on_spotify = (on_spotify == 'y')
+
+      print 'Publish Date[YYYY-MM-DD]: '
+      publish_date = Date.parse(gets.chomp)
+    rescue ArgumentError, TypeError => e
+      puts "⚠️  Error: #{e}!"
+      return
+    end
+
+    [genre_name, on_spotify, publish_date]
+  end
+
+  def acquire_game_input
+    begin
+      puts 'Start creating a new Game ✒️'
+      print 'Multiplayer: '
+      multiplayer = gets.chomp
+
+      print 'Last played at[YYYY-MM-DD]: '
+      last_played_at = Date.parse(gets.chomp)
+
+      print 'Publish Date[YYYY-MM-DD]: '
+      publish_date = Date.parse(gets.chomp)
+
+      print "Author's first name: "
+      author_fn = gets.chomp
+
+      print "Author's last name: "
+      author_ln = gets.chomp
+    rescue ArgumentError, TypeError => e
+      puts "⚠️  Error: #{e}!"
+      return
+    end
+
+    [multiplayer, last_played_at, publish_date, author_fn, author_ln]
   end
 end

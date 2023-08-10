@@ -4,6 +4,7 @@ class List
     list.each do |book|
       puts "- Publisher: \"#{book.publisher}\", Publish Date: #{book.publish_date}, Label: \"#{book.label.title}\""
     end
+    puts 'Press ENTER to get back to the menu'
   end
 
   def labels(list)
@@ -11,18 +12,20 @@ class List
     list.each do |label|
       puts "- Title: \"#{label.title}\", Color: #{label.color}"
     end
+    puts 'Press ENTER to get back to the menu'
   end
 
   def music_albums(list)
     puts 'No MusicAlbums' if list.empty?
     list.each do |album|
       if album.on_spotify
-        print '- On Sopotify: \"Yes\", '
+        print '- On Sopotify: Yes, '
       else
-        print '- On Sopotify: \"NO\", '
+        print '- On Sopotify: NO, '
       end
       puts "Publish Date: #{album.publish_date}, Genre: \"#{album.genre.name}\""
     end
+    puts 'Press ENTER to get back to the menu'
   end
 
   def genres(list)
@@ -30,6 +33,7 @@ class List
     list.each do |genre|
       puts "- Genre: \"#{genre.name}\""
     end
+    puts 'Press ENTER to get back to the menu'
   end
 
   def games(list)
@@ -38,6 +42,7 @@ class List
       print "- Multiplayer: \"#{game.multiplayer}\", Last played at: #{game.last_played_at}, "
       puts "Publish Date: #{game.publish_date}, Author: \"#{game.author.first_name} #{game.author.last_name}\""
     end
+    puts 'Press ENTER to get back to the menu'
   end
 
   def authors(list)
@@ -45,5 +50,6 @@ class List
     list.each do |author|
       puts "- Author's first name: \"#{author.first_name}\", Author's last name: #{author.last_name}"
     end
+    puts 'Press ENTER to get back to the menu'
   end
 end

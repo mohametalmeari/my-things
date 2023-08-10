@@ -53,38 +53,55 @@ class App
 
   def list_all_books
     @list.books(@books_and_labels[:books_list])
+    gets.chomp
   end
 
   def list_all_music_albums
     @list.music_albums(@albums_and_genres[:music_albums_list])
+    gets.chomp
   end
 
   def list_all_games
     @list.games(@games_and_authors[:games_list])
+    gets.chomp
   end
 
   def list_all_genres
     @list.genres(@albums_and_genres[:genres_list])
+    gets.chomp
   end
 
   def list_all_labels
     @list.labels(@books_and_labels[:labels_list])
+    gets.chomp
   end
 
   def list_all_authors
     @list.authors(@games_and_authors[:authors_list])
+    gets.chomp
   end
 
   def create_book
-    @books_and_labels = @create.new_book(@books_and_labels)
+    return unless (new_item = @create.new_book(@books_and_labels))
+
+    @books_and_labels = new_item
+    gets.chomp
   end
 
   def add_music_album
-    @albums_and_genres = @create.new_music_album(@albums_and_genres)
+    new_item = @create.new_music_album(@albums_and_genres)
+    return unless new_item
+
+    @albums_and_genres = new_item
+    gets.chomp
   end
 
   def create_game
-    @games_and_authors = @create.new_game(@games_and_authors)
+    new_item = @create.new_game(@games_and_authors)
+    return unless new_item
+
+    @games_and_authors = new_item
+    gets.chomp
   end
 
   def exit_app
