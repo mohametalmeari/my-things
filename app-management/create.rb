@@ -21,7 +21,6 @@ class Create
     saved_label.add_item(book)
     lists[:books_list] << book
     puts 'Book was created successfully ✅'
-    puts 'Press ENTER to get back to the menu'
     lists
   end
 
@@ -45,7 +44,6 @@ class Create
     saved_genre.add_item(music_album)
     lists[:music_albums_list] << music_album
     puts 'MusicAlbum was created successfully ✅'
-    puts 'Press ENTER to get back to the menu'
     lists
   end
 
@@ -69,7 +67,6 @@ class Create
     saved_author.add_item(game)
     lists[:games_list] << game
     puts 'Game was created successfully ✅'
-    puts 'Press ENTER to get back to the menu'
     lists
   end
 
