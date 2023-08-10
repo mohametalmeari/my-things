@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 <div align="center">
-  <img src="logo.png" alt="logo" width="140"  height="auto"/>
+  <img src="./assets/logo.png" alt="logo" width="140"  height="auto"/>
   <br/>
 
   <h1><b>Catalog of My Things</b></h3>
@@ -35,7 +35,7 @@
 
 **Catalog of My Things** is a console app that will help a user to keep a record of different types of things he owns: books, music albums, and games. Everything will be based on the UML class diagram presented below. The data will be stored in JSON files but we will also prepare a database with tables structure analogical to our program's class structure.
 
-<img src="catalog_of_my_things.png" alt="UML class diagram"/>
+<img src="./assets/catalog_of_my_things.png" alt="UML class diagram"/>
 
 ## 🛠 Built With <a name="built-with"></a>
 
