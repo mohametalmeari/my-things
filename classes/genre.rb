@@ -8,8 +8,8 @@ class Genre
     @items = []
   end
 
-  def add_item=(item)
-    item.genre = self
+  def add_item(item)
+    item.add_genre = self unless item.genre == (self)
     @items << item
   end
 end
