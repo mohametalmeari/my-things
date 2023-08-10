@@ -3,7 +3,7 @@ require_relative '../classes/music_album'
 describe MusicAlbum do
   context '#new' do
     it 'takes two parameters and returns a MusicAlbum object' do
-      album = MusicAlbum.new(on_spotify: false, publish_date: Date.new(2015,12, 1))
+      album = MusicAlbum.new(on_spotify: false, publish_date: Date.new(2015, 12, 1))
       album.should be_an_instance_of MusicAlbum
     end
   end
